@@ -1,21 +1,23 @@
-# memo-application
+# Memo application
 
-> A Vue.js project
+> 실무 위주의 누구나 할 수 있는 VueJS 시작하기 의 메모 관리 어플리케이션 예제에 대한 레파지토리입니다. 
+
+## Vue CLI Options
+
+* [x] vue-router 
+* [ ] eslint
+* [ ] unit test
+* [ ] e2e test
 
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 1. 프로젝트 모듈 설치하기
 npm install
 
-# serve with hot reload at localhost:8080
+# 2. 개발 서버 시작하기
 npm run dev
 
-# build for production with minification
+# 3. 어플리케이션 빌드하기 
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
