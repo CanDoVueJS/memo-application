@@ -35,4 +35,13 @@ export default {
 </script>
 
 <style>
+  html, body, div, input {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  #app {
+    width: 600px;
+    margin: 0 auto;
+  }
 </style>
