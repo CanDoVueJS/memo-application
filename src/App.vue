@@ -19,8 +19,8 @@ export default {
     this.memos = localStorage.memos ? JSON.parse(localStorage.memos) : [];
   },
   methods: {
-    addMemo (memo) {
-      this.memos.push(memo);
+    addMemo (payload) {
+      this.memos.push(payload);
       this.storeMemo();
     },
     storeMemo () {
@@ -35,9 +35,13 @@ export default {
 </script>
 
 <style>
-  html, body, div, input {
+  body {
+    background-color: #f5f5f5;
+  }
+  html, body, div, input, fieldset, form {
     margin: 0;
     padding: 0;
+    border: 0;
     box-sizing: border-box;
   }
   #app {
