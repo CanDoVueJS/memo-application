@@ -2,11 +2,13 @@
   <div id="app">
     <header-component :memos="memos"
                       @addMemo="addMemo"/>
+    <memo-list :memos="memos"/>
   </div>
 </template>
 
 <script>
 import HeaderComponent from './components/HeaderComponent';
+import MemoList from './components/MemoList';
 
 export default {
   name: 'app',
@@ -29,7 +31,8 @@ export default {
     }
   },
   components: {
-    HeaderComponent
+    HeaderComponent,
+    MemoList
   }
 }
 </script>
