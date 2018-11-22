@@ -5,11 +5,9 @@
           @reset.prevent="resetFields">
       <fieldset>
         <input type="text"
-               ref="inputField"
                v-model="title"
                placeholder="메모의 제목을 입력해주세요."/>
         <input type="text"
-               ref="inputField"
                v-model="content"
                placeholder="메모의 내용을 입력해주세요."/>
         <button type="submit">등록하기</button>
