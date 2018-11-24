@@ -1,5 +1,5 @@
 <template>
-  <div class="header-component">
+  <div class="app-header">
     <h1>Memo application</h1>
     <form @submit.prevent="addMemo"
           @reset.prevent="resetFields">
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'HeaderComponent',
+  name: 'AppHeader',
   props: {
     memos: {
       type: Array
@@ -50,32 +50,32 @@ export default {
 </script>
 
 <style scoped>
-  .header-component {
+  .app-header {
   }
-  .header-component h1 {
+  .app-header h1 {
     marging-bottom: 20px;
     text-align: center;
   }
-  .header-component form {
+  .app-header form {
     border: 1px solid #ececec;
     border-radius: 4px;
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.30), 0 2px 6px 2px rgba(60,64,67,0.15);
     background-color: #fff;
   }
-  .header-component form fieldset button[type="submit"],
-  .header-component form fieldset button[type="reset"] {
+  .app-header form fieldset button[type="submit"],
+  .app-header form fieldset button[type="reset"] {
     float: right;
     padding: 10px;
     border: 0;
     font-size: 16px;
   }
-  .header-component form fieldset input {
+  .app-header form fieldset input {
     width: 100%;
     height: 40px;
     padding: 10px;
     font-size: 14px;
   }
-  .header-component input:focus {
+  .app-header input:focus {
     outline: none;
   }
 </style>
