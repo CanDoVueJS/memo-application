@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <app-header></app-header>
-    <memo-list :memos="memos"></memo-list>
+    <app-header/>
+    <memo-app/>
   </div>
 </template>
 
 <script>
 import AppHeader from './components/AppHeader';
-import MemoList from './components/MemoList';
+import MemoApp from './components/MemoApp';
 
 export default {
   name: 'app',
   components: {
     AppHeader,
-    MemoList
+    MemoApp
   }
 }
 </script>
