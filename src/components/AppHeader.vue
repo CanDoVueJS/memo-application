@@ -42,9 +42,15 @@ export default {
       if (isEmpty) {
         return false;
       }
-      this.$emit('addMemo', { title, content });
+      this.storeMemo();
       this.resetFields();
     },
+    storeMemo () {
+      const { title, content } = this;
+      const memosToObject = localStorage.memos ? JSON.parse(localStorage.memos) : [];
+      memosToObject.push({ title, content });
+      localStorage.setItem('memos', JSON.stringify(memosToObject));
+    }
   }
 }
 </script>
@@ -68,6 +74,7 @@ export default {
     padding: 10px;
     border: 0;
     font-size: 16px;
+    background: none;
   }
   .header-component form fieldset input {
     width: 100%;
