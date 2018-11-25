@@ -36,6 +36,7 @@
           return false;
         }
         this.$emit('addMemo', { title, content });
+        this.resetFields();
       },
     }
   }
