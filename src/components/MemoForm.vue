@@ -1,6 +1,5 @@
 <template>
-  <div class="header-component">
-    <h1>Memo application</h1>
+  <div class="memo-form">
     <form @submit.prevent="addMemo"
           @reset.prevent="resetFields">
       <fieldset>
@@ -16,67 +15,54 @@
     </form>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'HeaderComponent',
-  props: {
-    memos: {
-      type: Array
-    }
-  },
-  data () {
-    return {
-      title: '',
-      content: '',
-    }
-  },
-  methods: {
-    resetFields () {
-      this.title = '';
-      this.content = '';
-    },
-    addMemo () {
-      const { title, content } = this;
-      const isEmpty = title.length <= 0 || content.length <= 0;
-      if (isEmpty) {
-        return false;
+  export default {
+    name: 'MemoForm',
+    data () {
+      return {
+        title: '',
+        content: '',
       }
-      this.$emit('addMemo', { title, content });
-      this.resetFields();
     },
+    methods: {
+      resetFields () {
+        this.title = '';
+        this.content = '';
+      },
+      addMemo () {
+        const { title, content } = this;
+        const isEmpty = title.length <= 0 || content.length <= 0;
+        if (isEmpty) {
+          return false;
+        }
+        this.$emit('addMemo', { title, content });
+        this.resetFields();
+      },
+    }
   }
-}
 </script>
-
 <style scoped>
-  .header-component {
-  }
-  .header-component h1 {
-    marging-bottom: 20px;
-    text-align: center;
-  }
-  .header-component form {
+  .memo-form form {
     border: 1px solid #ececec;
     border-radius: 4px;
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.30), 0 2px 6px 2px rgba(60,64,67,0.15);
     background-color: #fff;
   }
-  .header-component form fieldset button[type="submit"],
-  .header-component form fieldset button[type="reset"] {
+  .memo-form form fieldset button[type="submit"],
+  .memo-form form fieldset button[type="reset"] {
     float: right;
     padding: 10px;
     border: 0;
     font-size: 16px;
+    background: none;
   }
-  .header-component form fieldset input {
+  .memo-form form fieldset input {
     width: 100%;
     height: 40px;
     padding: 10px;
     font-size: 14px;
   }
-  .header-component input:focus {
+  .memo-form input:focus {
     outline: none;
   }
 </style>
-
