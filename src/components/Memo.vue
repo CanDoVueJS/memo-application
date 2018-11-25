@@ -3,7 +3,7 @@
     <strong>{{ memo.title }}</strong>
     <p>{{ memo.content }}</p>
     <div>
-      <button type="button">닫기</button>
+      <button type="button">X버튼</button>
     </div>
   </li>
 </template>
