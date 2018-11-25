@@ -4,7 +4,7 @@
       <strong>{{ memo.title }}</strong>
       <p>{{ memo.content }}</p>
       <div>
-        <button type="button">닫기</button>
+        <button @click="deleteMemo" type="button">닫기</button>
       </div>
     </li>
   </ul>
@@ -15,6 +15,12 @@
     props: {
       memos: {
         type: Array
+      }
+    },
+    methods: {
+      deleteMemo () {
+        console.log(new Date());
+        // this.$emit();
       }
     }
   }

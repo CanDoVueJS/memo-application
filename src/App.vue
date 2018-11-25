@@ -2,7 +2,8 @@
   <div id="app">
     <app-header :memos="memos"
                 @addMemo="addMemo"/>
-    <memo-list :memos="memos"></memo-list>
+    <memo-list :memos="memos"
+               @deleteMemo="deleteMemo"></memo-list>
   </div>
 </template>
 
@@ -24,6 +25,9 @@ export default {
     addMemo (payload) {
       this.memos.push(payload);
       this.storeMemo();
+    },
+    deleteMemo () {
+
     },
     storeMemo () {
       const memosToString = JSON.stringify(this.memos);
