@@ -1,38 +1,19 @@
 <template>
   <div id="app">
-    <app-header :memos="memos"
-                @addMemo="addMemo"/>
-    <memo-list :memos="memos"></memo-list>
+    <app-header/>
+    <memo-app/>
   </div>
 </template>
 
 <script>
 import AppHeader from './components/AppHeader';
-import MemoList from './components/MemoList';
+import MemoApp from './components/MemoApp';
 
 export default {
   name: 'app',
-  data () {
-    return {
-      memos: [],
-    }
-  },
-  created () {
-    this.memos = localStorage.memos ? JSON.parse(localStorage.memos) : [];
-  },
-  methods: {
-    addMemo (payload) {
-      this.memos.push(payload);
-      this.storeMemo();
-    },
-    storeMemo () {
-      const memosToString = JSON.stringify(this.memos);
-      localStorage.setItem('memos', memosToString);
-    }
-  },
   components: {
     AppHeader,
-    MemoList
+    MemoApp
   }
 }
 </script>

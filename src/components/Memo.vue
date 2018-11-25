@@ -1,30 +1,24 @@
 <template>
-  <ul class="memo-list">
-    <li v-for="(memo, index) in memos" :key="index">
-      <strong>{{ memo.title }}</strong>
-      <p>{{ memo.content }}</p>
-      <div>
-        <button type="button">닫기</button>
-      </div>
-    </li>
-  </ul>
+  <li class="memo-list">
+    <strong>{{ memo.title }}</strong>
+    <p>{{ memo.content }}</p>
+    <div>
+      <button type="button">X버튼</button>
+    </div>
+  </li>
 </template>
 <script>
   export default {
-    name: 'MemoList',
+    name: 'Memo',
     props: {
-      memos: {
-        type: Array
+      memo: {
+        type: Object
       }
     }
   }
 </script>
 <style scoped>
   .memo-list {
-    padding: 20px 0;
-    margin: 0;
-  }
-  .memo-list li {
     overflow: hidden;
     position: relative;
     margin-bottom: 15px;
@@ -34,7 +28,7 @@
     background-color: #fff;
     list-style: none;
   }
-  .memo-list li div {
+  .memo-list div {
     position: absolute;
     left: 0;
     top: 0;
@@ -42,7 +36,7 @@
     height: 30px;
     background-color: #cdcdcd;
   }
-  .memo-list li div button {
+  .memo-list div button {
     position: absolute;
     right: 7px;
     top: 7px;
@@ -54,11 +48,11 @@
     background-color: #ff9e9d;
     border: 0;
   }
-  .memo-list li strong {
+  .memo-list strong {
     display: block;
     margin-bottom: 15px;
   }
-  .memo-list li p {
+  .memo-list p {
     margin: 0;
   }
 </style>
