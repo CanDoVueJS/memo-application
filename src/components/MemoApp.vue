@@ -3,6 +3,7 @@
     <memo-form @addMemo="addMemo"/>
     <ul class="memo-list">
       <memo v-for="memo in memos"
+            :key="memo.id"
             :memo="memo"/>
     </ul>
   </div>
