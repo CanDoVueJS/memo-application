@@ -3,7 +3,7 @@
     <strong>{{ memo.title }}</strong>
     <p>{{ memo.content }}</p>
     <div>
-      <button type="button">X버튼</button>
+      <button type="button" @click="deleteMemo">X버튼</button>
     </div>
   </li>
 </template>
@@ -13,6 +13,12 @@
     props: {
       memo: {
         type: Object
+      }
+    },
+    methods: {
+      deleteMemo () {
+        const id = this.memo.id;
+        this.$emit('deleteMemo', id);
       }
     }
   }
