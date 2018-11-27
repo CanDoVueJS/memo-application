@@ -1,10 +1,17 @@
 <template>
   <li class="memo-list">
-    <strong>{{ memo.title }}</strong>
-    <p>{{ memo.content }}</p>
+    <strong>
+      <template v-if="!isEditing">{{ memo.title }}</template>
+      <input v-else type="text"/>
+    </strong>
+    <p>
+      <template v-if="!isEditing">{{ memo.content }}</template>
+      <input v-else type="text"/>
+    </p>
     <div>
       <button type="button" @click="deleteMemo">X버튼</button>
     </div>
+    <button type="button" @click="isEditing = !isEditing">버튼</button>
   </li>
 </template>
 <script>
@@ -13,6 +20,11 @@
     props: {
       memo: {
         type: Object
+      }
+    },
+    data () {
+      return {
+        isEditing: false,
       }
     },
     methods: {
@@ -33,6 +45,10 @@
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.30), 0 2px 6px 2px rgba(60,64,67,0.15);
     background-color: #fff;
     list-style: none;
+  }
+  .memo-list input[type="text"] {
+    border: 1px solid #ececec;
+    font-size: inherit;
   }
   .memo-list div {
     position: absolute;
