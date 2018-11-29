@@ -1,17 +1,17 @@
 <template>
   <li class="memo-list">
-    <strong>
-      <template v-if="!isEditing">{{ memo.title }}</template>
-      <input v-else type="text"/>
-    </strong>
-    <p>
+    <strong>{{ memo.title }}</strong>
+    <p @dblclick="handleDblClick">
       <template v-if="!isEditing">{{ memo.content }}</template>
-      <input v-else type="text"/>
+      <textarea v-else
+                ref="content"
+                type="text"
+                :value="memo.content"
+                @keydown.enter="editMemo"/>
     </p>
     <div>
       <button type="button" @click="deleteMemo">X버튼</button>
     </div>
-    <button type="button" @click="isEditing = !isEditing">버튼</button>
   </li>
 </template>
 <script>
@@ -28,6 +28,21 @@
       }
     },
     methods: {
+      handleDblClick () {
+        this.isEditing = true;
+        this.$nextTick(() => {
+          this.$refs.content.focus();
+        });
+      },
+      editMemo (e) {
+        const id = this.memo.id;
+        const content = e.target.value;
+        if (content.length <= 0) {
+          return false;
+        }
+        this.$emit('editMemo', { id, content });
+        this.isEditing = false;
+      },
       deleteMemo () {
         const id = this.memo.id;
         this.$emit('deleteMemo', id);
@@ -76,5 +91,11 @@
   }
   .memo-list p {
     margin: 0;
+  }
+  .memo-list p textarea {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: inherit;
+    resize: none;
   }
 </style>
