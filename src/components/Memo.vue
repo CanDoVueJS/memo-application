@@ -1,7 +1,14 @@
 <template>
   <li class="memo-list">
     <strong>{{ memo.title }}</strong>
-    <p>{{ memo.content }}</p>
+    <p @dblclick="handleDblClick">
+      <template v-if="!isEditing">{{ memo.content }}</template>
+      <textarea v-else
+                ref="content"
+                type="text"
+                :value="memo.content"
+                @keydown.enter="editMemo"/>
+    </p>
     <div>
       <button type="button" @click="deleteMemo">X버튼</button>
     </div>
@@ -15,7 +22,27 @@
         type: Object
       }
     },
+    data () {
+      return {
+        isEditing: false,
+      }
+    },
     methods: {
+      handleDblClick () {
+        this.isEditing = true;
+        this.$nextTick(() => {
+          this.$refs.content.focus();
+        });
+      },
+      editMemo (e) {
+        const id = this.memo.id;
+        const content = e.target.value;
+        if (content.length <= 0) {
+          return false;
+        }
+        this.$emit('editMemo', { id, content });
+        this.isEditing = false;
+      },
       deleteMemo () {
         const id = this.memo.id;
         this.$emit('deleteMemo', id);
@@ -33,6 +60,10 @@
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.30), 0 2px 6px 2px rgba(60,64,67,0.15);
     background-color: #fff;
     list-style: none;
+  }
+  .memo-list input[type="text"] {
+    border: 1px solid #ececec;
+    font-size: inherit;
   }
   .memo-list div {
     position: absolute;
@@ -60,5 +91,11 @@
   }
   .memo-list p {
     margin: 0;
+  }
+  .memo-list p textarea {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: inherit;
+    resize: none;
   }
 </style>
