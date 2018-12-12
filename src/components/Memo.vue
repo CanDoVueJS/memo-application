@@ -1,5 +1,5 @@
 <template>
-  <li class="memo-list">
+  <li class="memo-item">
     <strong>{{ memo.title }}</strong>
     <p @dblclick="handleDblClick">
       <template v-if="!isEditing">{{ memo.content }}</template>
@@ -58,7 +58,7 @@
   }
 </script>
 <style scoped>
-  .memo-list {
+  .memo-item {
     overflow: hidden;
     position: relative;
     margin-bottom: 15px;
@@ -68,11 +68,11 @@
     background-color: #fff;
     list-style: none;
   }
-  .memo-list input[type="text"] {
+  .memo-item input[type="text"] {
     border: 1px solid #ececec;
     font-size: inherit;
   }
-  .memo-list div {
+  .memo-item div {
     position: absolute;
     left: 0;
     top: 0;
@@ -80,7 +80,7 @@
     height: 30px;
     background-color: #cdcdcd;
   }
-  .memo-list div button {
+  .memo-item div button {
     position: absolute;
     right: 7px;
     top: 7px;
@@ -92,14 +92,14 @@
     background-color: #ff9e9d;
     border: 0;
   }
-  .memo-list strong {
+  .memo-item strong {
     display: block;
     margin-bottom: 15px;
   }
-  .memo-list p {
+  .memo-item p {
     margin: 0;
   }
-  .memo-list p input[type="text"] {
+  .memo-item p input[type="text"] {
     box-sizing: border-box;
     width: 100%;
     font-size: inherit;
