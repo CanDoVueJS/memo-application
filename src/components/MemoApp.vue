@@ -5,7 +5,10 @@
       <memo v-for="memo in memos"
             :key="memo.id"
             :memo="memo"
+            :editingId="editingId"
             @deleteMemo="deleteMemo"
+            @startEditing="startEditing"
+            @endEditing="endEditing"
             @editMemo="editMemo"/>
     </ul>
   </div>
@@ -18,6 +21,7 @@
     name: 'MemoApp',
     data () {
       return {
+        editingId: 0,
         memos: [],
       }
     },
@@ -28,6 +32,12 @@
       addMemo (payload) {
         this.memos.push(payload);
         this.storeMemo();
+      },
+      startEditing (id) {
+        this.editingId = id;
+      },
+      endEditing () {
+        this.editingId = 0;
       },
       storeMemo () {
         const memosToString = JSON.stringify(this.memos);
@@ -44,6 +54,7 @@
         const targetMemo = this.memos[targetIndex];
         this.memos.splice(targetIndex, 1, { ...targetMemo, content });
         this.storeMemo();
+        this.endEditing();
       }
     },
     components: {

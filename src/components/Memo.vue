@@ -1,13 +1,14 @@
 <template>
-  <li class="memo-list">
+  <li class="memo-item">
     <strong>{{ memo.title }}</strong>
     <p @dblclick="handleDblClick">
       <template v-if="!isEditing">{{ memo.content }}</template>
-      <textarea v-else
-                ref="content"
-                type="text"
-                :value="memo.content"
-                @keydown.enter="editMemo"/>
+      <input type="text"
+             v-else
+             ref="content"
+             :value="memo.content"
+             @blur="handleBlur"
+             @keydown.enter="editMemo"/>
     </p>
     <div>
       <button type="button" @click="deleteMemo">X버튼</button>
@@ -18,30 +19,36 @@
   export default {
     name: 'Memo',
     props: {
+      editingId: {
+        type: Number,
+      },
       memo: {
         type: Object
       }
     },
-    data () {
-      return {
-        isEditing: false,
+    computed: {
+      isEditing () {
+        return this.memo.id === this.editingId;
       }
     },
     methods: {
+      handleBlur () {
+        this.$emit('endEditing');
+      },
       handleDblClick () {
-        this.isEditing = true;
+        const { id } = this.memo;
+        this.$emit('startEditing', id);
         this.$nextTick(() => {
           this.$refs.content.focus();
         });
       },
       editMemo (e) {
         const id = this.memo.id;
-        const content = e.target.value;
+        const content = e.target.value.trim();
         if (content.length <= 0) {
           return false;
         }
         this.$emit('editMemo', { id, content });
-        this.isEditing = false;
       },
       deleteMemo () {
         const id = this.memo.id;
@@ -51,7 +58,7 @@
   }
 </script>
 <style scoped>
-  .memo-list {
+  .memo-item {
     overflow: hidden;
     position: relative;
     margin-bottom: 15px;
@@ -61,11 +68,11 @@
     background-color: #fff;
     list-style: none;
   }
-  .memo-list input[type="text"] {
+  .memo-item input[type="text"] {
     border: 1px solid #ececec;
     font-size: inherit;
   }
-  .memo-list div {
+  .memo-item div {
     position: absolute;
     left: 0;
     top: 0;
@@ -73,7 +80,7 @@
     height: 30px;
     background-color: #cdcdcd;
   }
-  .memo-list div button {
+  .memo-item div button {
     position: absolute;
     right: 7px;
     top: 7px;
@@ -85,17 +92,16 @@
     background-color: #ff9e9d;
     border: 0;
   }
-  .memo-list strong {
+  .memo-item strong {
     display: block;
     margin-bottom: 15px;
   }
-  .memo-list p {
+  .memo-item p {
     margin: 0;
   }
-  .memo-list p textarea {
+  .memo-item p input[type="text"] {
     box-sizing: border-box;
     width: 100%;
     font-size: inherit;
-    resize: none;
   }
 </style>
