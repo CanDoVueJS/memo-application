@@ -18,26 +18,22 @@
 <script>
   export default {
     name: 'Memo',
+    data () {
+      return {
+        isEditing: false,
+      }
+    },
     props: {
-      editingId: {
-        type: Number,
-      },
       memo: {
         type: Object
       }
     },
-    computed: {
-      isEditing () {
-        return this.memo.id === this.editingId;
-      }
-    },
     methods: {
       handleBlur () {
-        this.$emit('endEditing');
+        this.isEditing = false;
       },
       handleDblClick () {
-        const { id } = this.memo;
-        this.$emit('startEditing', id);
+        this.isEditing = !this.isEditing;
         this.$nextTick(() => {
           this.$refs.content.focus();
         });
@@ -49,6 +45,7 @@
           return false;
         }
         this.$emit('editMemo', { id, content });
+        this.isEditing = false;
       },
       deleteMemo () {
         const id = this.memo.id;
