@@ -33,7 +33,7 @@
         this.isEditing = false;
       },
       handleDblClick () {
-        this.isEditing = !this.isEditing;
+        this.isEditing = true;
         this.$nextTick(() => {
           this.$refs.content.focus();
         });
