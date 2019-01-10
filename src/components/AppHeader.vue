@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: 'AppHeader',
-}
+  name: 'AppHeader'
+};
 </script>
 
 <style scoped>
@@ -18,4 +18,3 @@ export default {
     text-align: center;
   }
 </style>
-

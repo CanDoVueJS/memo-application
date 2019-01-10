@@ -11,46 +11,46 @@
   </div>
 </template>
 <script>
-  import MemoForm from './MemoForm';
-  import Memo from './Memo';
+import MemoForm from './MemoForm';
+import Memo from './Memo';
 
-  export default {
-    name: 'MemoApp',
-    data () {
-      return {
-        memos: [],
-      }
+export default {
+  name: 'MemoApp',
+  data () {
+    return {
+      memos: []
+    };
+  },
+  created () {
+    this.memos = localStorage.memos ? JSON.parse(localStorage.memos) : [];
+  },
+  methods: {
+    addMemo (payload) {
+      this.memos.push(payload);
+      this.storeMemo();
     },
-    created () {
-      this.memos = localStorage.memos ? JSON.parse(localStorage.memos) : [];
+    storeMemo () {
+      const memosToString = JSON.stringify(this.memos);
+      localStorage.setItem('memos', memosToString);
     },
-    methods: {
-      addMemo (payload) {
-        this.memos.push(payload);
-        this.storeMemo();
-      },
-      storeMemo () {
-        const memosToString = JSON.stringify(this.memos);
-        localStorage.setItem('memos', memosToString);
-      },
-      deleteMemo (id) {
-        const targetIndex = this.memos.findIndex(v => v.id === id);
-        this.memos.splice(targetIndex, 1);
-        this.storeMemo();
-      },
-      editMemo (payload) {
-        const { id, content } = payload;
-        const targetIndex = this.memos.findIndex(v => v.id === id);
-        const targetMemo = this.memos[targetIndex];
-        this.memos.splice(targetIndex, 1, { ...targetMemo, content });
-        this.storeMemo();
-      }
+    deleteMemo (id) {
+      const targetIndex = this.memos.findIndex(v => v.id === id);
+      this.memos.splice(targetIndex, 1);
+      this.storeMemo();
     },
-    components: {
-      MemoForm,
-      Memo
+    editMemo (payload) {
+      const { id, content } = payload;
+      const targetIndex = this.memos.findIndex(v => v.id === id);
+      const targetMemo = this.memos[targetIndex];
+      this.memos.splice(targetIndex, 1, { ...targetMemo, content });
+      this.storeMemo();
     }
+  },
+  components: {
+    MemoForm,
+    Memo
   }
+};
 </script>
 <style scoped>
   .memo-list {

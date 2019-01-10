@@ -15,7 +15,7 @@ export default {
     AppHeader,
     MemoApp
   }
-}
+};
 </script>
 
 <style>
