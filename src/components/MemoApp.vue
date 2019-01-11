@@ -34,12 +34,10 @@ export default {
   },
   methods: {
     addMemo (payload) {
-      memoAPICore.get('/')
+      memoAPICore.post('/', payload)
         .then(res => {
-          this.memos = res.data;
+          this.memos.push(res.data);
         });
-      this.memos.push(payload);
-      this.storeMemo();
     },
     storeMemo () {
       const memosToString = JSON.stringify(this.memos);
