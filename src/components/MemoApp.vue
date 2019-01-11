@@ -13,6 +13,11 @@
 <script>
 import MemoForm from './MemoForm';
 import Memo from './Memo';
+import axios from 'axios';
+
+const memoAPICore = axios.create({
+  baseURL: '//localhost:2403/memos'
+});
 
 export default {
   name: 'MemoApp',
@@ -22,10 +27,17 @@ export default {
     };
   },
   created () {
-    this.memos = localStorage.memos ? JSON.parse(localStorage.memos) : [];
+    memoAPICore.get('/')
+      .then(res => {
+        this.memos = res.data;
+      });
   },
   methods: {
     addMemo (payload) {
+      memoAPICore.get('/')
+        .then(res => {
+          this.memos = res.data;
+        });
       this.memos.push(payload);
       this.storeMemo();
     },
