@@ -12,6 +12,7 @@
     "dpd:up": "cd memo-db && dpd -d"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "vue": "^2.5.11"
   },
   "browserslist": [
