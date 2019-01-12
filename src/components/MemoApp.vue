@@ -11,46 +11,56 @@
   </div>
 </template>
 <script>
-  import MemoForm from './MemoForm';
-  import Memo from './Memo';
+import MemoForm from './MemoForm';
+import Memo from './Memo';
+import axios from 'axios';
 
-  export default {
-    name: 'MemoApp',
-    data () {
-      return {
-        memos: [],
-      }
+const memoAPICore = axios.create({
+  baseURL: '//localhost:2403/memos'
+});
+
+export default {
+  name: 'MemoApp',
+  data () {
+    return {
+      memos: []
+    };
+  },
+  created () {
+    memoAPICore.get('/')
+      .then(res => {
+        this.memos = res.data;
+      });
+  },
+  methods: {
+    addMemo (payload) {
+      memoAPICore.post('/', payload)
+        .then(res => {
+          this.memos.push(res.data);
+        });
     },
-    created () {
-      this.memos = localStorage.memos ? JSON.parse(localStorage.memos) : [];
+    deleteMemo (id) {
+      const targetIndex = this.memos.findIndex(v => v.id === id);
+      memoAPICore.delete(`/${id}`)
+        .then(() => {
+          this.memos.splice(targetIndex, 1);
+        });
     },
-    methods: {
-      addMemo (payload) {
-        this.memos.push(payload);
-        this.storeMemo();
-      },
-      storeMemo () {
-        const memosToString = JSON.stringify(this.memos);
-        localStorage.setItem('memos', memosToString);
-      },
-      deleteMemo (id) {
-        const targetIndex = this.memos.findIndex(v => v.id === id);
-        this.memos.splice(targetIndex, 1);
-        this.storeMemo();
-      },
-      editMemo (payload) {
-        const { id, content } = payload;
-        const targetIndex = this.memos.findIndex(v => v.id === id);
-        const targetMemo = this.memos[targetIndex];
-        this.memos.splice(targetIndex, 1, { ...targetMemo, content });
-        this.storeMemo();
-      }
-    },
-    components: {
-      MemoForm,
-      Memo
+    editMemo (payload) {
+      const { id, content } = payload;
+      const targetIndex = this.memos.findIndex(v => v.id === id);
+      const targetMemo = this.memos[targetIndex];
+      memoAPICore.put(`/${id}`, { content })
+        .then(() => {
+          this.memos.splice(targetIndex, 1, { ...targetMemo, content });
+        });
     }
+  },
+  components: {
+    MemoForm,
+    Memo
   }
+};
 </script>
 <style scoped>
   .memo-list {

@@ -16,31 +16,30 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'MemoForm',
-    data () {
-      return {
-        title: '',
-        content: '',
-      }
+export default {
+  name: 'MemoForm',
+  data () {
+    return {
+      title: '',
+      content: ''
+    };
+  },
+  methods: {
+    resetFields () {
+      this.title = '';
+      this.content = '';
     },
-    methods: {
-      resetFields () {
-        this.title = '';
-        this.content = '';
-      },
-      addMemo () {
-        const id = new Date().getTime();
-        const { title, content } = this;
-        const isEmpty = title.length <= 0 || content.length <= 0;
-        if (isEmpty) {
-          return false;
-        }
-        this.$emit('addMemo', { id, title, content });
-        this.resetFields();
-      },
+    addMemo () {
+      const { title, content } = this;
+      const isEmpty = title.length <= 0 || content.length <= 0;
+      if (isEmpty) {
+        return false;
+      }
+      this.$emit('addMemo', { title, content });
+      this.resetFields();
     }
   }
+};
 </script>
 <style scoped>
   .memo-form form {

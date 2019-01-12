@@ -16,43 +16,43 @@
   </li>
 </template>
 <script>
-  export default {
-    name: 'Memo',
-    data () {
-      return {
-        isEditing: false,
-      }
+export default {
+  name: 'Memo',
+  data () {
+    return {
+      isEditing: false
+    };
+  },
+  props: {
+    memo: {
+      type: Object
+    }
+  },
+  methods: {
+    handleBlur () {
+      this.isEditing = false;
     },
-    props: {
-      memo: {
-        type: Object
-      }
+    handleDblClick () {
+      this.isEditing = true;
+      this.$nextTick(() => {
+        this.$refs.content.focus();
+      });
     },
-    methods: {
-      handleBlur () {
-        this.isEditing = false;
-      },
-      handleDblClick () {
-        this.isEditing = true;
-        this.$nextTick(() => {
-          this.$refs.content.focus();
-        });
-      },
-      editMemo (e) {
-        const id = this.memo.id;
-        const content = e.target.value.trim();
-        if (content.length <= 0) {
-          return false;
-        }
-        this.$emit('editMemo', { id, content });
-        this.isEditing = false;
-      },
-      deleteMemo () {
-        const id = this.memo.id;
-        this.$emit('deleteMemo', id);
+    editMemo (e) {
+      const id = this.memo.id;
+      const content = e.target.value.trim();
+      if (content.length <= 0) {
+        return false;
       }
+      this.$emit('editMemo', { id, content });
+      this.isEditing = false;
+    },
+    deleteMemo () {
+      const id = this.memo.id;
+      this.$emit('deleteMemo', id);
     }
   }
+};
 </script>
 <style scoped>
   .memo-item {
