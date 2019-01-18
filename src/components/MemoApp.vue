@@ -16,7 +16,7 @@ import Memo from './Memo';
 import axios from 'axios';
 
 const memoAPICore = axios.create({
-  baseURL: '//localhost:2403/memos'
+  baseURL: 'http://localhost:2403/memos'
 });
 
 export default {
