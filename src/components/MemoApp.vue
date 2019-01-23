@@ -13,48 +13,25 @@
 <script>
 import MemoForm from './MemoForm';
 import Memo from './Memo';
-import axios from 'axios';
-
-const memoAPICore = axios.create({
-  baseURL: 'http://localhost:2403/memos'
-});
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'MemoApp',
-  data () {
-    return {
-      memos: []
-    };
+  computed: {
+    ...mapState([
+      'memos'
+    ])
   },
   created () {
-    memoAPICore.get('/')
-      .then(res => {
-        this.memos = res.data;
-      });
+    this.fetchMemos();
   },
   methods: {
-    addMemo (payload) {
-      memoAPICore.post('/', payload)
-        .then(res => {
-          this.memos.push(res.data);
-        });
-    },
-    deleteMemo (id) {
-      const targetIndex = this.memos.findIndex(v => v.id === id);
-      memoAPICore.delete(`/${id}`)
-        .then(() => {
-          this.memos.splice(targetIndex, 1);
-        });
-    },
-    editMemo (payload) {
-      const { id, content } = payload;
-      const targetIndex = this.memos.findIndex(v => v.id === id);
-      const targetMemo = this.memos[targetIndex];
-      memoAPICore.put(`/${id}`, { content })
-        .then(() => {
-          this.memos.splice(targetIndex, 1, { ...targetMemo, content });
-        });
-    }
+    ...mapActions([
+      'fetchMemos',
+      'addMemo',
+      'deleteMemo',
+      'editMemo'
+    ])
   },
   components: {
     MemoForm,
