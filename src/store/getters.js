@@ -4,4 +4,4 @@ export function getMemoCount (state) {
 
 export default {
   getMemoCount
-}
+};
