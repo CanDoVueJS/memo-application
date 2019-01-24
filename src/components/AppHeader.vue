@@ -6,15 +6,15 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
-  export default {
-    name: 'AppHeader',
-    computed: {
-      ...mapGetters([
-        'getMemoCount'
-      ])
-    }
-  };
+import { mapGetters } from 'vuex';
+export default {
+  name: 'AppHeader',
+  computed: {
+    ...mapGetters([
+      'getMemoCount'
+    ])
+  }
+};
 </script>
 
 <style scoped>
