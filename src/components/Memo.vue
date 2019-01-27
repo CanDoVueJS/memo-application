@@ -10,9 +10,9 @@
              @blur="handleBlur"
              @keydown.enter="editMemo"/>
     </p>
-    <div>
-      <button type="button" @click="deleteMemo">X버튼</button>
-    </div>
+    <button type="button" @click="deleteMemo">
+      <i class="fas fa-times"></i>
+    </button>
   </li>
 </template>
 <script>
@@ -58,10 +58,9 @@ export default {
   .memo-item {
     overflow: hidden;
     position: relative;
-    margin-bottom: 15px;
-    padding: 50px 20px 20px;
-    border-radius: 4px;
-    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.30), 0 2px 6px 2px rgba(60,64,67,0.15);
+    margin-bottom: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.2);
     background-color: #fff;
     list-style: none;
   }
@@ -69,32 +68,26 @@ export default {
     border: 1px solid #ececec;
     font-size: inherit;
   }
-  .memo-item div {
+  .memo-item button {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 30px;
-    background-color: #cdcdcd;
-  }
-  .memo-item div button {
-    position: absolute;
-    right: 7px;
-    top: 7px;
-    padding: 0;
-    width: 15px;
-    height: 15px;
-    text-indent: -10000px;
-    border-radius: 25px;
-    background-color: #ff9e9d;
+    right: 20px;
+    top: 20px;
+    font-size: 20px;
+    color: #e5e5e5;
     border: 0;
   }
   .memo-item strong {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: normal;
+    word-break: break-all;
   }
   .memo-item p {
     margin: 0;
+    font-size: 14px;
+    line-height: 22px;
+    color: #666;
   }
   .memo-item p input[type="text"] {
     box-sizing: border-box;

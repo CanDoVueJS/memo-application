@@ -3,14 +3,17 @@
     <form @submit.prevent="addMemo"
           @reset.prevent="resetFields">
       <fieldset>
-        <input type="text"
-               v-model="title"
-               placeholder="메모의 제목을 입력해주세요."/>
-        <input type="text"
-               v-model="content"
-               placeholder="메모의 내용을 입력해주세요."/>
+        <div>
+          <input class="memo-form__title-form"
+                 type="text"
+                 v-model="title"
+                 placeholder="메모의 제목을 입력해주세요."/>
+          <textarea class="memo-form__content-form"
+                    v-model="content"
+                    placeholder="메모의 내용을 입력해주세요."/>
+          <button type="reset"><i class="fas fa-sync-alt"></i></button>
+        </div>
         <button type="submit">등록하기</button>
-        <button type="reset">취소</button>
       </fieldset>
     </form>
   </div>
@@ -42,25 +45,46 @@ export default {
 };
 </script>
 <style scoped>
-  .memo-form form {
-    border: 1px solid #ececec;
-    border-radius: 4px;
-    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.30), 0 2px 6px 2px rgba(60,64,67,0.15);
-    background-color: #fff;
+  .memo-form {
+    margin-bottom: 24px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #eee;
   }
-  .memo-form form fieldset button[type="submit"],
-  .memo-form form fieldset button[type="reset"] {
-    float: right;
-    padding: 10px;
-    border: 0;
+  .memo-form form fieldset div {
+    position: relative;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+  }
+  .memo-form form fieldset div button[type="reset"] {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
     font-size: 16px;
     background: none;
   }
-  .memo-form form fieldset input {
+  .memo-form form fieldset button[type="submit"] {
+    float: right;
+    width: 96px;
+    padding: 12px 0;
+    border-radius: 4px;
+    background-color: #ff5a00;
+    color: #fff;
+    font-size: 16px;
+  }
+  .memo-form form fieldset .memo-form__title-form {
     width: 100%;
-    height: 40px;
-    padding: 10px;
+    margin-bottom: 12px;
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .memo-form form fieldset .memo-form__content-form {
+    width: 100%;
+    height: 66px;
     font-size: 14px;
+    line-height: 22px;
+    vertical-align: top;
   }
   .memo-form input:focus {
     outline: none;
