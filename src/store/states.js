@@ -1,5 +1,3 @@
-const states = {
+export default {
   memos: []
 };
-
-export default states;
