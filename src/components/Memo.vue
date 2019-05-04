@@ -3,57 +3,63 @@
     <strong>{{ memo.title }}</strong>
     <p @dblclick="handleDblClick">
       <template v-if="!isEditing">{{ memo.content }}</template>
-      <input type="text"
-             v-else
+      <input v-else
+             type="text"
              ref="content"
              :value="memo.content"
              @blur="handleBlur"
-             @keydown.enter="editMemo"/>
+             @keydown.enter="updateMemo"/>
     </p>
     <button type="button" @click="deleteMemo">
       <i class="fas fa-times"></i>
     </button>
   </li>
 </template>
+
 <script>
 export default {
   name: 'Memo',
-  data () {
-    return {
-      isEditing: false
-    };
-  },
   props: {
     memo: {
       type: Object
+    },
+    editingId: {
+      type: Number
+    }
+  },
+  computed: {
+    isEditing () {
+      return this.memo.id === this.editingId;
     }
   },
   methods: {
     handleBlur () {
-      this.isEditing = false;
+      this.$emit('resetEditingId');
+    },
+    deleteMemo () {
+      const id = this.memo.id;
+      this.$emit('deleteMemo', id);
     },
     handleDblClick () {
-      this.isEditing = true;
+      const { id } = this.memo;
+      this.$emit('setEditingId', id);
       this.$nextTick(() => {
         this.$refs.content.focus();
       });
     },
-    editMemo (e) {
+    updateMemo (e) {
       const id = this.memo.id;
       const content = e.target.value.trim();
       if (content.length <= 0) {
         return false;
       }
-      this.$emit('editMemo', { id, content });
-      this.isEditing = false;
+      this.$emit('updateMemo', { id, content });
+      this.$refs.content.blur();
     },
-    deleteMemo () {
-      const id = this.memo.id;
-      this.$emit('deleteMemo', id);
-    }
   }
-};
+}
 </script>
+
 <style scoped>
   .memo-item {
     overflow: hidden;
@@ -88,6 +94,11 @@ export default {
     font-size: 14px;
     line-height: 22px;
     color: #666;
+  }
+  .memo-item p input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: inherit;
   }
   .memo-item p input[type="text"] {
     box-sizing: border-box;

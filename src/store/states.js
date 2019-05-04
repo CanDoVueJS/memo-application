@@ -1,3 +1,4 @@
 export default {
-  memos: []
-};
+  memos: [],
+  editingId: 0
+}

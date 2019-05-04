@@ -1,7 +1,6 @@
 <template>
   <div class="memo-form">
-    <form @submit.prevent="addMemo"
-          @reset.prevent="resetFields">
+    <form @submit.prevent="addMemo">
       <fieldset>
         <div>
           <input class="memo-form__title-form"
@@ -18,17 +17,19 @@
     </form>
   </div>
 </template>
+
 <script>
 export default {
   name: 'MemoForm',
   data () {
     return {
       title: '',
-      content: ''
-    };
+      content: '',
+    }
   },
   methods: {
     resetFields () {
+      // 제목과 내용을 빈 값으록 초기화 시켜준다.
       this.title = '';
       this.content = '';
     },
@@ -39,11 +40,13 @@ export default {
         return false;
       }
       this.$emit('addMemo', { title, content });
+      // 부모 컴포넌트에 데이터를 전파한 후 데이터를 다시 원상태로 초기화한다.
       this.resetFields();
-    }
+    },
   }
-};
+}
 </script>
+
 <style scoped>
   .memo-form {
     margin-bottom: 24px;
