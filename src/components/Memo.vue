@@ -55,9 +55,9 @@ export default {
       }
       this.$emit('updateMemo', { id, content });
       this.$refs.content.blur();
-    },
+    }
   }
-}
+};
 </script>
 
 <style scoped>

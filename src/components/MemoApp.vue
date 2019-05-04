@@ -34,7 +34,7 @@ export default {
   methods: {
     ...mapMutations([
       SET_EDITING_ID,
-      RESET_EDITING_ID,
+      RESET_EDITING_ID
     ]),
     ...mapActions([
       'fetchMemos',
@@ -47,7 +47,7 @@ export default {
     MemoForm,
     Memo
   }
-}
+};
 </script>
 
 <style scoped>

@@ -26,7 +26,7 @@ export default {
     state.memos.splice(targetIndex, 1, { ...targetMemo, content });
   },
   [SET_EDITING_ID] (state, id) {
-    state.editingId = id
+    state.editingId = id;
   },
   [RESET_EDITING_ID] (state) {
     state.editingId = 0;

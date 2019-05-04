@@ -24,8 +24,8 @@ export default {
   data () {
     return {
       title: '',
-      content: '',
-    }
+      content: ''
+    };
   },
   methods: {
     resetFields () {
@@ -42,9 +42,9 @@ export default {
       this.$emit('addMemo', { title, content });
       // 부모 컴포넌트에 데이터를 전파한 후 데이터를 다시 원상태로 초기화한다.
       this.resetFields();
-    },
+    }
   }
-}
+};
 </script>
 
 <style scoped>
